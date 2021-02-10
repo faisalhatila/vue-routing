@@ -29,7 +29,7 @@ const router = createRouter({
       path: '/users',
       components: { default: UsersList, footer: UsersFooter },
       beforeEnter(to, from, next) {
-        console.log('Global BeforeEach');
+        console.log('Route Config Before Enter');
         console.log('to', to);
         console.log('from', from);
         next(true);
@@ -53,12 +53,19 @@ const router = createRouter({
   }
 });
 
-// router.beforeEach((to, from, next) => {
-//   console.log('Global BeforeEach');
-//   console.log('to', to);
-//   console.log('from', from);
-//   next(true);
-// });
+router.beforeEach((to, from, next) => {
+  console.log('Global BeforeEach');
+  console.log('to', to);
+  console.log('from', from);
+  next(true);
+});
+
+router.afterEach((to, from) => {
+  // sending analytic data to server
+  console.log('Global after each');
+  console.log('to', to);
+  console.log('from', from);
+});
 
 const app = createApp(App);
 
